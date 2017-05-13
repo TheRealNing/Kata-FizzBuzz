@@ -53,95 +53,42 @@ namespace FizzBuzz
             Output.For(number).Should().Be("FizzBuzz");
         }
 
-        private static IEnumerable<int> Digits()
+        private static IEnumerable<TestCaseData> Digits()
         {
-            var list = new List<int>();
+            return BuildList(1, null, i => i % 3 == 0 || i % 5 == 0);
+        }
 
-            for (var i = 1; i <= 100; i++)
+        private static IEnumerable<TestCaseData> MultiplesOfThree()
+        {
+            return BuildList(3, "Fizz", i => i % 5 == 0);
+        }
+
+        private static IEnumerable<TestCaseData> MultiplesOfFive()
+        {
+            return BuildList(5, "Buzz", i => i % 3 == 0);
+        }
+
+        private static IEnumerable<TestCaseData> MultiplesOfFifteen()
+        {
+            return BuildList(15, "FizzBuzz");
+        }
+
+        private static IEnumerable<TestCaseData> BuildList(int multiple, string result, Func<int, bool> filter = null)
+        {
+            filter = filter ?? (i => false);
+            var list = new List<TestCaseData>();
+
+            for (var i = 1; i <= 100 / multiple; i++)
             {
-                if (i % 3 != 0 && i % 5 != 0)
-                    list.Add(i);
+                if (!filter(i))
+                {
+                    var value = i * multiple;
+                    result = result ?? i.ToString();
+                    list.Add(new TestCaseData(value).SetName($"{value} = {result}"));
+                }
             }
 
             return list;
-        }
-
-        private static IEnumerable<int> MultiplesOfThree()
-        {
-            var list = new List<int>();
-
-            for (var i = 1; i <= 33; i++)
-            {
-                if (i % 5 != 0)
-                    list.Add(i * 3);
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<int> MultiplesOfFive()
-        {
-            var list = new List<int>();
-
-            for (var i = 1; i <= 20; i++)
-            {
-                if (i % 3 != 0)
-                    list.Add(i * 5);
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<int> MultiplesOfFifteen()
-        {
-            var list = new List<int>();
-
-            for (var i = 1; i <= 6; i++)
-            {
-                    list.Add(i * 15);
-            }
-
-            return list;
-        }
-    }
-
-    internal class ListWriter
-    {
-        private readonly List<string> _innerList = new List<string>();
-
-        public void Write(string result)
-        {
-            _innerList.Add(result);
-        }
-
-        public string For(int number)
-        {
-            return _innerList[number - 1];
-        }
-    }
-
-    public class FizzBuzzGame
-    {
-        private readonly Action<string> _output;
-
-        public FizzBuzzGame(Action<string> output)
-        {
-            _output = output ?? throw new ArgumentNullException(nameof(output));
-        }
-
-        public void Play()
-        {
-            for (var i = 1; i < 101; i++)
-            {
-                if (i % 15 == 0)
-                    _output("FizzBuzz");
-                else if (i % 5 == 0)
-                    _output("Buzz");
-                else if (i % 3 == 0)
-                    _output("Fizz");
-                else
-                    _output(i.ToString());
-            }
         }
     }
 }
