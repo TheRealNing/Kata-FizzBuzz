@@ -1,0 +1,82 @@
+﻿public void ShouldOutputDigitWhereNotFizzOrBuzz(int number)
+[TestCase(1, "1")]
+[TestCase(2, "2")]
+[TestCase(4, "4")]
+[TestCase(7, "7")]
+[TestCase(52, "52")]
+[TestCase(98, "98")]
+
+public void ShouldOutputFizzWhereMultipleOfThree(int number)
+[TestCase(3)]
+[TestCase(6)]
+[TestCase(12)]
+[TestCase(51)]
+[TestCase(99)]
+
+public void ShouldOutputBuzzWhereMultipleOfFive(int number)
+[TestCase(5)]
+[TestCase(10)]
+[TestCase(20)]
+[TestCase(95)]
+
+public void ShouldOutputFizzBuzzWhereMultipleOfFiveAndThree(int number)
+[TestCase(15)]
+[TestCase(30)]
+[TestCase(60)]
+[TestCase(90)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [Test]
+        [TestCase(5)]
+        [TestCase(10)]
+        [TestCase(20)]
+        [TestCase(95)]
+        public void ShouldOutputBuzzWhereMultipleOfFive(int number)
+        {
+            Game.Play();
+
+            Output.ForNumber(number).Should().Be("Buzz");
+        }
+
+        [Test]
+        [TestCase(15)]
+        [TestCase(30)]
+        [TestCase(60)]
+        [TestCase(90)]
+        public void ShouldOutputFizzBuzzWhereMultipleOfThreeAndFive(int number)
+        {
+            Game.Play();
+
+            Output.ForNumber(number).Should().Be("FizzBuzz");
+        }

@@ -1,0 +1,3 @@
+﻿According to http://www.yoda.arachsys.com/csharp/stringbuilder.html, concatenating two constant strings is extremely efficient
+because the compiler knows that both constants will always make the same string, so it makes that string for you as another constant,
+i.e. you're code doesn't actually concatenate the strings at all!
