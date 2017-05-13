@@ -1,2 +1,2 @@
 # Kata-FizzBuzz
-My project for the FizzBuzz TDD Kata
+My empty project for the FizzBuzz TDD Kata
