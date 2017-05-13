@@ -1,2 +1,3 @@
 # Kata-FizzBuzz
-My project for the FizzBuzz TDD Kata
+Tests calculate test values :-(
+Game not refactored to fluent style :-(
